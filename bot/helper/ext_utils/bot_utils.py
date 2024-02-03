@@ -172,10 +172,10 @@ def get_readable_message():
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
         msg += f"💾Title:{escape(f'{download.name()}')}\n"
         msg += f"by {source(download)}\n\n"
-        msg += f"⛓️Progress:<b>{download.status()}...</b>"
+        msg += f"<b>{download.status()}...</b>"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
             msg += f"\n<code>{progress_bar(download.progress())}</code> {download.progress()}"
-            msg += f"\n{download.processed_bytes()} of {download.size()}"
+            msg += f"\n⛓️Progress:{download.processed_bytes()} of {download.size()}"
             msg += f"\n🚀Speed: {download.speed()}"
             msg += f"\n👤User: {source(download)}"
             msg += f'\n⏳ETA: {download.eta()}'
