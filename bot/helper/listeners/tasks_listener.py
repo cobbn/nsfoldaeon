@@ -352,9 +352,9 @@ class MirrorLeechListener:
         iButton = extra_btns(iButton)
         if self.isLeech:
             if folders > 1:
-                msg += f'<b>• Total files: </b>{folders}\n'
+                msg += f'<b>📁 Total files: </b>{folders}\n'
             if mime_type != 0:
-                msg += f'<b>• Corrupted files: </b>{mime_type}\n'
+                msg += f'<b>😑 Corrupted files: </b>{mime_type}\n'
             msg += f'<b>🌐 Uploaded by: </b>{self.tag}\n'
             msg += f'<b>🏷️ User ID: </b><code>{self.message.from_user.id}</code>\n\n'
             if not files:
