@@ -157,7 +157,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = '<b>⚡Powered By: <a href="https://telegram.me/Moviezpure">Moviezpure </a></b>\n <b>😎Owned By: <a href="https://telegram.me/Luffyy_474">Luffy</a></b>\n\n'
+    msg = '<b>⚡Powered By: <a href="https://telegram.me/Moviezpure">Moviezpure </a></b>\n <b>😎Owned By: <a href="https://telegram.me/Luffybest">Luffy</a></b>\n\n'
     button = None
     tasks = len(download_dict)
     currentTime = get_readable_time(time() - botStartTime)
