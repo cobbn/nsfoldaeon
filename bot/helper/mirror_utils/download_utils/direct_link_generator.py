@@ -438,8 +438,9 @@ def terabox(url):
                     if not details['title']:
                         details['title'] = content['server_filename']
                     folderPath = details['title']
+                domain = urlparse(content['dlink']).netloc
                 item = {
-                    'url': content['dlink'],
+                    'url': content['dlink'].replace(domain , 'd3.terabox.app') ,
                     'filename': content['server_filename'],
                     'path' : path.join(folderPath),
                 }
@@ -467,8 +468,7 @@ def terabox(url):
         except Exception as e:
             raise DirectDownloadLinkException(e)
     if len(details['contents']) == 1:
-        domain = urlparse(details['contents'][0]['url']).netloc
-        return details['contents'][0]['url'].replace(domain , 'd3.terabox.app')
+        return details['contents'][0]['url']
     return details
 
 
