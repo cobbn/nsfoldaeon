@@ -157,7 +157,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = '<b>⚡Powered By: <a href="https://telegram.me/Moviezpure">Moviezpure </a></b>\n <b>😎Owned By: <a href="https://telegram.me/Luffybest">Luffy</a></b>\n\n'
+    msg = '<b>Powered By: <a href="https://telegram.me/acaatr">Reaper</a></b>\n\n'
     button = None
     tasks = len(download_dict)
     currentTime = get_readable_time(time() - botStartTime)
@@ -170,29 +170,27 @@ def get_readable_message():
         globals()['STATUS_START'] = STATUS_LIMIT * (PAGES - 1)
         globals()['PAGE_NO'] = PAGES
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
-        msg += f"💾Title:{escape(f'{download.name()}')}\n"
+        msg += f"{escape(f'{download.name()}')}\n"
         msg += f"by {source(download)}\n\n"
         msg += f"<b>{download.status()}...</b>"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
             msg += f"\n<code>{progress_bar(download.progress())}</code> {download.progress()}"
-            msg += f"\n⛓️Progress:{download.processed_bytes()} of {download.size()}"
-            msg += f"\n🚀Speed: {download.speed()}"
-            msg += f"\n👤User: {source(download)}"
-            msg += f'\n⏳ETA: {download.eta()}'
+            msg += f" | Speed: {download.speed()}"
+            msg += f"\nUser: {source(download)}"
+            msg += f' | ETA: {download.eta()}'
             if hasattr(download, 'seeders_num'):
                 try:
-                    msg += f"\n🌱Seeders: {download.seeders_num()} | 🐌Leechers: {download.leechers_num()}"
+                    msg += f"\nS/L: {download.seeders_num()}/{download.leechers_num()}"
                 except:
                     pass
         elif download.status() == MirrorStatus.STATUS_SEEDING:
-            msg += f"\n📦Size: {download.size()}"
-            msg += f"\n🚀Speed: {download.upload_speed()}"
+            msg += f"\nSize: {download.size()}"
+            msg += f"\nSpeed: {download.upload_speed()}"
             msg += f"\nUploaded: {download.uploaded_bytes()}"
             msg += f"\nRatio: {download.ratio()}"
             msg += f"\nTime: {download.seeding_time()}"
         else:
-            msg += f"\n📦Size: {download.size()}"
-        msg += f"\n🕑Elapsed: {get_readable_time(time() - download.message.date.timestamp())}"
+            msg += f"\nSize: {download.size()}"
         msg += f"\n❌Abort:/stop_{download.gid()[:8]}\n\n"
     if len(msg) == 0:
         return None, None
@@ -212,11 +210,9 @@ def get_readable_message():
         buttons.ibutton(f"{PAGE_NO}/{PAGES}", "status ref")
         buttons.ibutton("Next▶️", "status nex")
         button = buttons.build_menu(3)
-    msg += f"<b>⛩️ Tasks</b>: {tasks}{bmax_task}"
-    msg += f"\n<b>⛩️ Bot uptime</b>: {currentTime}"
-    msg += f"\n<b>⛩️ Free disk space</b>: {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
-    msg += f"\n<b>⛩️ Uploading speed</b>: {get_readable_file_size(up_speed)}/s"
-    msg += f"\n<b>⛩️ Downloading speed</b>: {get_readable_file_size(dl_speed)}/s"
+    msg += f"<b>Tasks</b>: {tasks}{bmax_task}"
+    msg += f"<b> | UPTM</b>: {currentTime}"
+    msg += f"<b> | Free</b>: {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
     return msg, button
 
 
