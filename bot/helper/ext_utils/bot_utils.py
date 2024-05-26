@@ -41,17 +41,17 @@ PAGE_NO = 1
 STATUS_LIMIT = 4
 
 class MirrorStatus:
-    STATUS_UPLOADING = "📤Uploading"
-    STATUS_DOWNLOADING = "📥Downloading"
+    STATUS_UPLOADING = "🚀"
+    STATUS_DOWNLOADING = "🛝"
     STATUS_CLONING = "♻️Cloning"
     STATUS_QUEUEDL = "DL queued"
     STATUS_QUEUEUP = "UL queued"
-    STATUS_PAUSED = "⏸️Paused"
-    STATUS_ARCHIVING = "Archiving"
-    STATUS_EXTRACTING = "Extracting"
+    STATUS_PAUSED = "⏸️"
+    STATUS_ARCHIVING = "🔐"
+    STATUS_EXTRACTING = "🔓"
     STATUS_SPLITTING = "✂️Splitting"
     STATUS_CHECKING = "CheckUp"
-    STATUS_SEEDING = "🌱Seeding"
+    STATUS_SEEDING = "🌱"
 
 
 class setInterval:
@@ -170,11 +170,11 @@ def get_readable_message():
         globals()['STATUS_START'] = STATUS_LIMIT * (PAGES - 1)
         globals()['PAGE_NO'] = PAGES
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
-        msg += f"{escape(f'{download.name()}')}\n\n"
-        msg += f"<b>{download.status()}...</b>"
+        msg += f"<b>{escape(f'{download.name()}')}</b>\n\n"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
             msg += f"\n<code>{progress_bar(download.progress())}</code> {download.progress()}"
-            msg += f" | {download.speed()}"
+            msg += f"\n<b>{download.processed_bytes()} of {download.size()}</b>"
+            msg += f"<b>{download.status()} » {download.speed()}</b>"
             msg += f"\nUser: {source(download)}"
             msg += f' | ETA: {download.eta()}'
             if hasattr(download, 'seeders_num'):
@@ -190,7 +190,7 @@ def get_readable_message():
             msg += f"\nTime: {download.seeding_time()}"
         else:
             msg += f"\nSize: {download.size()}"
-        msg += f"\n❌Abort:/stop_{download.gid()[:8]}\n\n"
+        msg += f"\n<b>❌Abort:/stop_{download.gid()[:8]}</b>\n\n"
     if len(msg) == 0:
         return None, None
     dl_speed = 0
