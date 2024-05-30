@@ -440,7 +440,7 @@ def terabox(url):
                     folderPath = details['title']
                 domain = urlparse(content['dlink']).netloc
                 item = {
-                    'url': content['dlink'].replace(domain , 'd3.terabox.app') ,
+                    'url': content['dlink'].replace(domain , 'd8.terabox.app') ,
                     'filename': content['server_filename'],
                     'path' : path.join(folderPath),
                 }
