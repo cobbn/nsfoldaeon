@@ -468,7 +468,8 @@ def terabox(url):
         except Exception as e:
             raise DirectDownloadLinkException(e)
     if len(details['contents']) == 1:
-        return details['contents'][0]['url']
+         domain = urlparse(details['contents'][0]['url']).netloc
+        return details['contents'][0]['url'].replace(domain , 'd8.terabox.app')
     return details
 
 
